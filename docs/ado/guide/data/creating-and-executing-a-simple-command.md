@@ -44,11 +44,11 @@ A simple command is one that is not parameterized and requires no persistence. T
     objCmd.CommandType = adCmdText  
   
     ' Connect to the data source.  
-    Set objConn = GetNewConnection  
+    objConn = GetNewConnection  
     objCmd.ActiveConnection = objConn  
   
     ' Execute once and display...  
-    Set objRs = objCmd.Execute  
+    objRs = objCmd.Execute  
   
     Debug.Print "ALFKI"  
     Do While Not objRs.EOF  
@@ -59,10 +59,7 @@ A simple command is one that is not parameterized and requires no persistence. T
   
     'clean up  
     objRs.Close  
-    objConn.Close  
-    Set objRs = Nothing  
-    Set objConn = Nothing  
-    Set objCmd = Nothing  
+    objConn.Close
     Exit Sub  
   
 ErrHandler:  
@@ -74,11 +71,7 @@ ErrHandler:
     If objConn.State = adStateOpen Then  
         objConn.Close  
     End If  
-  
-    Set objRs = Nothing  
-    Set objConn = Nothing  
-    Set objCmd = Nothing  
-  
+
     If Err <> 0 Then  
         MsgBox Err.Source & "-->" & Err.Description, , "Error"  
     End If  
@@ -137,7 +130,7 @@ Loop
   
 'Clean up.  
 objRs.Close  
-Set objRs = Nothing  
+
 ```  
   
 ## Using a Connection object  
@@ -166,7 +159,7 @@ ConnectionString = "Provider=" & DP & _
 objConn.Open ConnectionString  
   
 ' Execute command through the connection and display...  
-Set objRs = objConn.Execute(CommandText)  
+objRs = objConn.Execute(CommandText)  
   
 Debug.Print "ALFKI"  
 Do While Not objRs.EOF  
@@ -178,6 +171,4 @@ Loop
 'Clean up.  
 objRs.Close  
 objConn.Close  
-Set objRs = Nothing  
-Set objConn = Nothing  
 ```
